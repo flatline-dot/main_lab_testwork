@@ -15,9 +15,9 @@ app = FastAPI()
 
 @app.get('/dataload')
 async def load_data(session: Session = Depends(get_session)):
-    path_file = os.path.join('dtdt.txt')
+    path_file = os.path.join('bills.csv')
     print(path_file)
-    bills = import_data(path_file)
+    bills = import_data('app/bills.csv')
 
     for bill in bills:
         if not Validate(bill).process():
