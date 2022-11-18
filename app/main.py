@@ -1,3 +1,5 @@
+import os
+
 from typing import Union, List
 
 from fastapi import FastAPI, Depends
@@ -13,7 +15,9 @@ app = FastAPI()
 
 @app.get('/dataload')
 async def load_data(session: Session = Depends(get_session)):
-    bills = import_data('C:\\Project\\main_lab_testwork\\app\\bills.csv')
+    path_file = os.path.join('dtdt.txt')
+    print(path_file)
+    bills = import_data(path_file)
 
     for bill in bills:
         if not Validate(bill).process():

@@ -1,7 +1,7 @@
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from .models import Base
+from app.models import Base
 
 db_path = os.path.join('sqlite.db')
 
