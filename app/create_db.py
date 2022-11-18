@@ -1,18 +1,16 @@
 import os
-import asyncio
-from sqlalchemy.ext.asyncio import create_async_engine
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 from .models import Base
 
-db_path = os.path.join('..', 'sqlite.db')
+db_path = os.path.join('sqlite.db')
 
-DATABASE_URL = f'sqlite+aiosqlite:///{db_path}'
+DATABASE_URL = f'sqlite:///{db_path}'
 
-engine = create_async_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL)
 
+Session = sessionmaker(bind=engine)
 
-async def create_db():
-        async with engine.begin() as conn:
-            await conn.run_sync(Base.metadata.create_all)
 
 if __name__ == '__main__':
-    asyncio.run(create_db())
+    Base.metadata.create_all(engine)

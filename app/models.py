@@ -6,15 +6,15 @@ Base = declarative_base()
 
 class Bill(Base):
     __tablename__ = 'bill'
-    __table_args__ = (UniqueConstraint('client_name', 'client_org', 'num_bill'),)
+    __table_args__ = (UniqueConstraint('client_name', 'client_org', 'num'),)
 
     id = Column(Integer, primary_key=True)
-    client_name = Column(String(30), unique=True)
+    client_name = Column(String(30))
     client_org = Column(ForeignKey('org.id', ondelete='CASCADE'))
-    num_bill = Column(Integer)
-    sum_bill = Column(Integer)
-    date_bill = Column(Date)
-    service_bill = Column(ForeignKey('service.id', ondelete='CASCADE'))
+    num = Column(Integer)
+    sum = Column(Integer)
+    date = Column(Date)
+    service = Column(ForeignKey('service.id', ondelete='CASCADE'))
     orgs = relationship('Org')
     services = relationship('Service')
 

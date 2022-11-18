@@ -26,20 +26,19 @@ class Validate():
                 return False
 
     def valid_service(self):
-        if  not self.data['service'] or self.data['service'] == '-':
+        if not self.data['service'] or self.data['service'] == '-':
             return False
         return True
     
     def valid_date(self):
 
         try:
-            self.data['date'] = datetime.strptime(self.data['date'], "%d.%m.%Y")
+            self.data['date'] = datetime.strptime(self.data['date'], "%d.%m.%Y").date()
             return True
         except:
             return False
 
     def valid_num(self):
-        print(self.data['№'])
         if isinstance(self.data['№'], int):
             return True
         else:
@@ -60,16 +59,5 @@ class Validate():
                     self.valid_date(),
                     self.valid_num(),
                     self.valid_client_org()
-                   ]
-        )
-
-test = import_data('C:\\Project\\main_lab_testwork\\app\\bills.csv')
-a = Validate(test[1]).process()
-print(a)
-
-
-
-    
-
-    
-
+                    ]
+                   )
